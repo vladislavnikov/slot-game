@@ -1,6 +1,7 @@
 import configuration from "./src/config/configuration";
 import { Slot } from "./src/models/Slot";
+import { printResult } from "./utils/printResult";
 
 
 const slot = new Slot(configuration);
-console.log(slot.spin());
+printResult(slot.spin());
