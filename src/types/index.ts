@@ -11,3 +11,10 @@ export interface SpinResult {
   reelPositions: number[]; 
   screen: number[][];
 }
+
+export interface LineWin {
+  lineIndex: number;
+  symbol: number;
+  count: number;
+  payout: number;
+}
