@@ -8,6 +8,15 @@ export interface GameConfig {
 }
 
 export interface SpinResult {
-  reelPositions: number[]; 
+  reelPositions: number[];
   screen: number[][];
+  lineWins: LineWin[];
+  totalWin: number;
+}
+
+export interface LineWin {
+  lineIndex: number;
+  symbol: number;
+  count: number;
+  payout: number;
 }

@@ -1,13 +1,16 @@
 import { Reel } from "./Reel";
-import type { GameConfig, SpinResult} from "../types";
+import type { GameConfig, SpinResult } from "../types";
+import { WinChecker } from "./WinChecker";
 
 export class Slot {
   private reels: Reel[]; //columns
   private rowsCount: number;
+  private checker: WinChecker;
 
   constructor(private config: GameConfig) {
     this.reels = config.reels.map((strip) => new Reel(strip));
     this.rowsCount = config.rowsCount;
+    this.checker = new WinChecker(config.lines, config.symbols);
   }
 
   spin(): SpinResult {
@@ -21,6 +24,9 @@ export class Slot {
       screen.push(columns.map((column) => column[row]));
     }
 
-    return { reelPositions, screen };
+    const lineWins = this.checker.check(screen);
+    const totalWin = lineWins.reduce((sum, win) => sum + win.payout, 0);
+
+    return { reelPositions, screen, lineWins, totalWin };
   }
 }
