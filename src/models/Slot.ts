@@ -13,7 +13,7 @@ export class Slot {
     this.checker = new WinChecker(config.lines, config.symbols);
   }
 
-  spin(): SpinResult {
+  spin(bet: number): SpinResult {
     const reelPositions = this.reels.map((reel) => reel.spin());
     const columns = this.reels.map((reel, i) =>
       reel.getSymbols(reelPositions[i], this.rowsCount),
@@ -24,9 +24,11 @@ export class Slot {
       screen.push(columns.map((column) => column[row]));
     }
 
-    const lineWins = this.checker.check(screen);
+    const lineWins = this.checker.check(screen, bet);
     const totalWin = lineWins.reduce((sum, win) => sum + win.payout, 0);
 
-    return { reelPositions, screen, lineWins, totalWin };
+    const totalBet = bet * this.config.lines.length;
+
+    return { bet, totalBet, reelPositions, screen, lineWins, totalWin };
   }
 }

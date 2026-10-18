@@ -6,7 +6,7 @@ export class WinChecker {
     private symbols: Record<number, number[]>,
   ) {}
 
-  check(screen: number[][]): LineWin[] {
+  check(screen: number[][], bet: number): LineWin[] {
     const wins: LineWin[] = [];
 
     for (let i = 0; i < this.lines.length; i++) {
@@ -18,7 +18,7 @@ export class WinChecker {
         count++;
       }
 
-      const payout = this.symbols[symbol][count - 1];
+      const payout = this.symbols[symbol][count - 1] * bet;
       if (payout > 0) {
         wins.push({ lineIndex: i, symbol, count, payout });
       }

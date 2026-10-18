@@ -3,17 +3,19 @@ import type { Slot } from "../src/models/Slot";
 type SimulateParams = {
   slot: Slot;
   spins: number;
-  betPerSpin: number;
-}
+  bet: number; // bet per line
+};
 
-export function simulate({ slot, spins, betPerSpin }: SimulateParams): void {
-  const totalBet = spins * betPerSpin;
+export function simulate({ slot, spins, bet }: SimulateParams): void {
+  let totalBet = 0;
   let totalWin = 0;
 
   const start = Date.now();
 
   for (let i = 0; i < spins; i++) {
-    totalWin += slot.spin().totalWin;
+    const result = slot.spin(bet);
+    totalBet += result.totalBet;
+    totalWin += result.totalWin;
   }
 
   const seconds = (Date.now() - start) / 1000;

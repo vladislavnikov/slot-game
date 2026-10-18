@@ -1,6 +1,7 @@
 import type { SpinResult } from "../src/types";
 
 export function printResult(result: SpinResult): void {
+  console.log(`Bet per line: ${result.bet} | Total bet: ${result.totalBet}`);
   console.log(`Reel positions: ${result.reelPositions.join(", ")}`);
 
   console.log("Screen:");

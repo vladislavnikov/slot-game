@@ -8,6 +8,8 @@ export interface GameConfig {
 }
 
 export interface SpinResult {
+  bet: number; // bet per line
+  totalBet: number; // bet x number of lines
   reelPositions: number[];
   screen: number[][];
   lineWins: LineWin[];
