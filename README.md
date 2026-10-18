@@ -1,4 +1,4 @@
-# Slot game\
+# Slot game
 
 Back-end logic for a simple slot game, written in TypeScript with an object-oriented structure.
 
